@@ -21,7 +21,7 @@ spec:
  clusterID: openshift
  credentialsSecret:
    name: quay-integration
-   namespace: policies
+   namespace: rtc-policies
  insecureRegistry: false
  quayHostname: https://{{ fromConfigMap "policies" "quay-config" "host" }}
 ---
@@ -29,7 +29,7 @@ kind: Secret
 type: Opaque
 metadata:
   name: quay-integration
-  namespace: policies
+  namespace: rtc-policies
 apiVersion: v1
 data:
   token: '{{ fromSecret "openshift-operators" "quay-integration" "token" }}'

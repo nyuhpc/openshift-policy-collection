@@ -2,7 +2,7 @@ apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
 metadata:
   name: placement-openshift-plus-clusters
-  namespace: policies
+  namespace: rtc-policies
 spec:
   predicates:
   - requiredClusterSelector:

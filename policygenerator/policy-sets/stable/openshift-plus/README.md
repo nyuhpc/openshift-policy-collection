@@ -22,7 +22,7 @@ Prior to applying the `PolicySet`, perform these steps:
     kind: ManagedClusterSetBinding
     metadata:
         name: default
-        namespace: policies
+        namespace: rtc-policies
     spec:
         clusterSet: default
     ```
