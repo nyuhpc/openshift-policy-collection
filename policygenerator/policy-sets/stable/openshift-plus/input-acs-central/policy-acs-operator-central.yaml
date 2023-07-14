@@ -34,6 +34,13 @@ metadata:
   name: stackrox-central-services
 spec:
   central:
+    db:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+        - key: node-role.kubernetes.io/infra
+          value: reserved
+          effect: NoSchedule
     nodeSelector:
       node-role.kubernetes.io/infra: ""
     tolerations:
@@ -54,6 +61,13 @@ spec:
   egress:
     connectivityPolicy: Online
   scanner:
+    db:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+        - key: node-role.kubernetes.io/infra
+          value: reserved
+          effect: NoSchedule
     analyzer:
       tolerations:
         - key: node-role.kubernetes.io/infra
