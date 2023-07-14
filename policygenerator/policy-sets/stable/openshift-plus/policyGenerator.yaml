@@ -77,16 +77,16 @@ policies:
   remediationAction: inform
 # ACS Policies - end
 # Observability Policy - start
-- name: policy-ocm-observability
-  consolidateManifests: false
-  categories:
-    - CA Assessment Authorization and Monitoring
-  controls: 
-    - CA-7 Continuous Monitoring
-  dependencies:
-    - name: policy-odf
-  manifests:
-    - path: input-acm-observability/
+# - name: policy-ocm-observability
+#   consolidateManifests: false
+#   categories:
+#     - CA Assessment Authorization and Monitoring
+#   controls: 
+#     - CA-7 Continuous Monitoring
+#   dependencies:
+#     - name: policy-odf
+#   manifests:
+#     - path: input-acm-observability/
 # Observability Policy - end
 # ODF Policies - start
 #- name: policy-odf
