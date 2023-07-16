@@ -1,64 +1,40 @@
-# This policy applies configuration to OpenShift OAuth custom resources.
-apiVersion: policy.open-cluster-management.io/v1
-kind: Policy
+apiVersion: config.openshift.io/v1
+kind: OAuth
 metadata:
-  name: policy-oauth-config
-  annotations:
-    policy.open-cluster-management.io/standards: NIST SP 800-53
-    policy.open-cluster-management.io/categories: CM Configuration Management
-    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+  name: cluster
 spec:
-  remediationAction: enforce
-  disabled: false
-  policy-templates:
-    - objectDefinition:
-        apiVersion: policy.open-cluster-management.io/v1
-        kind: ConfigurationPolicy
-        metadata:
-          name: oauth-config
-        spec:
-          remediationAction: inform
-          severity: low
-          object-templates:
-            - complianceType: musthave
-              objectDefinition:
-                apiVersion: config.openshift.io/v1
-                kind: OAuth
-                metadata:
-                  name: cluster
-                spec:
-                  identityProviders:
-                  - mappingMethod: claim
-                    name: HPC-Admin-SSO
-                    openID:
-                      claims:
-                        email:
-                        - email
-                        groups:
-                        - groups
-                        name:
-                        - name
-                        preferredUsername:
-                        - preferred_username
-                      clientID: rtc-openshift-admins
-                      clientSecret:
-                        name: hpc-sso-openid-client-secret
-                      issuer: https://sso.hpc.nyu.edu/auth/realms/hpc-admin
-                    type: OpenID
-                  - mappingMethod: claim
-                    name: NYU-SSO
-                    openID:
-                      claims:
-                        email:
-                        - email
-                        groups:
-                        - groups
-                        name:
-                        - name
-                        preferredUsername:
-                        - preferred_username
-                      clientID: rtc-openshift-users
-                      clientSecret:
-                        name: nyu-sso-openid-client-secret
-                      issuer: https://sso.hpc.nyu.edu/auth/realms/hpc
-                    type: OpenID
+  identityProviders:
+  - mappingMethod: claim
+    name: HPC-Admin-SSO
+    openID:
+      claims:
+        email:
+        - email
+        groups:
+        - groups
+        name:
+        - name
+        preferredUsername:
+        - preferred_username
+      clientID: rtc-openshift-admins
+      clientSecret:
+        name: hpc-sso-openid-client-secret
+      issuer: https://sso.hpc.nyu.edu/auth/realms/hpc-admin
+    type: OpenID
+  - mappingMethod: claim
+    name: NYU-SSO
+    openID:
+      claims:
+        email:
+        - email
+        groups:
+        - groups
+        name:
+        - name
+        preferredUsername:
+        - preferred_username
+      clientID: rtc-openshift-users
+      clientSecret:
+        name: nyu-sso-openid-client-secret
+      issuer: https://sso.hpc.nyu.edu/auth/realms/hpc
+    type: OpenID
