@@ -10,3 +10,4 @@ spec:
         matchExpressions:
           - {key: name, operator: In, values: ["sdev-rtc"]}
           - {key: vendor, operator: In, values: ["OpenShift"]}
+          
