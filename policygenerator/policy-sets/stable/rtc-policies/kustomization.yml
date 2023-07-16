@@ -2,4 +2,3 @@ generators:
 - ./policyGenerator.yaml
 commonLabels:
   open-cluster-management.io/policy-set: rtc-policies
-
