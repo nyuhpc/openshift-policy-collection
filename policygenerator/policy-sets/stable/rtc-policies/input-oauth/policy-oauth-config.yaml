@@ -61,3 +61,4 @@ spec:
                       clientSecret:
                         name: nyu-sso-openid-client-secret
                       issuer: https://sso.hpc.nyu.edu/auth/realms/hpc
+                    type: OpenID
