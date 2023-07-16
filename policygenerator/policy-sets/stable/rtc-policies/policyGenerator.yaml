@@ -24,8 +24,6 @@ policies:
     - CM-2 Baseline Configuration
   manifests:
     - path: input-oauth/
-  policySets:
-    - openshift-rtc
 # Compliance Operator Policies - end
 policySets:
   - description: The OpenShift RTC policy set applies several policies
