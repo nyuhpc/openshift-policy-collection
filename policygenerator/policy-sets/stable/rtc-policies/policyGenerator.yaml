@@ -1,0 +1,39 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: rtc-policies
+placementBindingDefaults:
+  name: binding-policy-openshift-rtc
+policyDefaults:
+  categories:
+    - CM Configuration Management
+  controls: 
+    - CM-2 Baseline Configuration
+  namespace: rtc-policies
+  policySets:
+    - openshift-rtc
+  remediationAction: enforce
+  severity: medium
+  standards:
+    - NIST SP 800-53
+policies:
+- name: policy-oauth-config
+  categories:
+    - CM Configuration Management
+  controls:
+    - CM-2 Baseline Configuration
+  manifests:
+    - path: input-oauth/
+- name: policy-gitops-operator-install
+  categories:
+    - CM Configuration Management
+  controls:
+    - CM-2 Baseline Configuration
+  manifests:
+    - path: input-argocd-gitops/gitops-operator-install.yaml
+policySets:
+  - description: The OpenShift RTC policy set applies several policies
+      that will configure the RTC cluster and install desired components.
+    name: openshift-rtc
+    placement:
+      placementPath: input/rtc-placement.yaml

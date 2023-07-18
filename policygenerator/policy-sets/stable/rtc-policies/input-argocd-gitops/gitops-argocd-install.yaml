@@ -1,0 +1,205 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: openshift-gitops
+  namespace: openshift-gitops
+spec:
+  resourceTrackingMethod: annotation+label
+  applicationSet:
+    resources:
+      limits:
+        cpu: "2"
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 512Mi
+    webhookServer:
+      ingress:
+        enabled: false
+      route:
+        enabled: false
+  controller:
+    processors: {}
+    resources:
+      limits:
+        cpu: "2"
+        memory: 2Gi
+      requests:
+        cpu: 250m
+        memory: 1Gi
+    sharding: {}
+  grafana:
+    enabled: false
+    ingress:
+      enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+    route:
+      enabled: false
+  ha:
+    enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+  initialSSHKnownHosts: {}
+  kustomizeBuildOptions: --enable-alpha-plugins
+  notifications:
+    enabled: false
+  prometheus:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  rbac:
+    policy: |
+      g, evans, role:admin
+      g, argo-admins, role:admin
+    scopes: '[groups,email]'
+  redis:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+  repo:
+    env:
+    - name: XDG_CONFIG_HOME
+      value: /.config
+    - name: GOOGLE_APPLICATION_CREDENTIALS
+      value: /gcp-satellite-capsule-kms/sops-sa-satellite-capsule.json
+    initContainers:
+    - args:
+        - '-c'
+        - >-
+          cp
+          /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
+          /policy-generator/PolicyGenerator
+      command:
+        - /bin/bash
+      image: >-
+        registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel8:v2.8
+      name: policy-generator-install
+      resources: {}
+      volumeMounts:
+        - mountPath: /policy-generator
+          name: policy-generator
+    - args:
+        - '-c'
+        - >-
+          mv ksops /custom-tools/; mv kustomize /custom-tools; cp -f
+          /policy-generator/PolicyGenerator /custom-tools; echo "Done.";
+      command:
+        - /bin/bash
+      image: 'viaductoss/ksops:v4.2.1'
+      name: install-ksops
+      resources: {}
+      volumeMounts:
+        - mountPath: /custom-tools
+          name: custom-tools
+        - mountPath: /policy-generator
+          name: policy-generator
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+    volumeMounts:
+    - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
+      name: policy-generator
+    - mountPath: /usr/local/bin/kustomize
+      name: custom-tools
+      subPath: kustomize
+    - mountPath: /.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+      name: custom-tools
+      subPath: ksops
+    - mountPath: /gcp-satellite-capsule-kms
+      name: gcp-satellite-capsule-kms
+    volumes:
+    - emptyDir: {}
+      name: policy-generator
+    - emptyDir: {}
+      name: custom-tools
+    - name: gcp-satellite-capsule-kms
+      secret:
+        secretName: gcp-satellite-capsule-kms
+    - name: sops-config
+      secret:
+        secretName: sops-config
+  resourceExclusions: |
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - TaskRun
+      - PipelineRun
+  server:
+    autoscale:
+      enabled: false
+    grpc:
+      ingress:
+        enabled: false
+    ingress:
+      enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 125m
+        memory: 128Mi
+    route:
+      enabled: true
+      tls:
+        insecureEdgeTerminationPolicy: Redirect
+        termination: reencrypt
+    service:
+      type: ""
+  sso:
+    dex:
+      openShiftOAuth: true
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 250m
+          memory: 128Mi
+    provider: dex
+  tls:
+    ca: {}
+---
+apiVersion: v1
+data:
+  sops-sa-satellite-capsule.json: '{{ fromSecret "rtc-policies" "gcp-satellite-capsule-kms" "sops-sa-satellite-capsule.json" }}'
+kind: Secret
+metadata:
+  name: gcp-satellite-capsule-kms
+  namespace: openshift-gitops
+type: Opaque
+---
+apiVersion: v1
+data:
+  password: '{{ fromSecret "rtc-policies" "nyuhpc-creds" "password" }}'
+  type: '{{ fromSecret "rtc-policies" "nyuhpc-creds" "type" }}'
+  url: '{{ fromSecret "rtc-policies" "nyuhpc-creds" "url" }}'
+  username: '{{ fromSecret "rtc-policies" "nyuhpc-creds" "username" }}'
+kind: Secret
+metadata:
+  name: nyuhpc-creds
+  namespace: openshift-gitops
+type: Opaque

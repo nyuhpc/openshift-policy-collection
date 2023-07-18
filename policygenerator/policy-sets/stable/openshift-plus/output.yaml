@@ -4,7 +4,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: placement-openshift-plus-clusters
-  namespace: policies
+  namespace: rtc-policies
 spec:
   predicates:
   - requiredClusterSelector:
@@ -25,7 +25,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: placement-openshift-plus-hub
-  namespace: policies
+  namespace: rtc-policies
 spec:
   predicates:
   - requiredClusterSelector:
@@ -42,7 +42,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: binding-policy-openshift-plus-hub
-  namespace: policies
+  namespace: rtc-policies
 placementRef:
   apiGroup: cluster.open-cluster-management.io
   kind: Placement
@@ -58,7 +58,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: binding-policy-openshift-plus-hub2
-  namespace: policies
+  namespace: rtc-policies
 placementRef:
   apiGroup: cluster.open-cluster-management.io
   kind: Placement
@@ -79,7 +79,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-acs-central-ca-bundle
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -251,7 +251,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-acs-central-status
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -309,7 +309,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-acs-operator-central
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -398,7 +398,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-acs-sync-resources
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -455,7 +455,7 @@ spec:
             kind: Secret
             metadata:
               name: admission-control-tls
-              namespace: policies
+              namespace: rtc-policies
             type: Opaque
         remediationAction: enforce
         severity: medium
@@ -478,7 +478,7 @@ spec:
             kind: Secret
             metadata:
               name: collector-tls
-              namespace: policies
+              namespace: rtc-policies
             type: Opaque
         remediationAction: enforce
         severity: medium
@@ -502,7 +502,7 @@ spec:
             kind: Secret
             metadata:
               name: sensor-tls
-              namespace: policies
+              namespace: rtc-policies
             type: Opaque
         remediationAction: enforce
         severity: medium
@@ -542,7 +542,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-advanced-managed-cluster-security
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -626,11 +626,11 @@ spec:
           objectDefinition:
             apiVersion: v1
             data:
-              admission-control-cert.pem: '{{hub fromSecret "policies" "admission-control-tls"
+              admission-control-cert.pem: '{{hub fromSecret "rtc-policies" "admission-control-tls"
                 "admission-control-cert.pem" hub}}'
-              admission-control-key.pem: '{{hub fromSecret "policies" "admission-control-tls"
+              admission-control-key.pem: '{{hub fromSecret "rtc-policies" "admission-control-tls"
                 "admission-control-key.pem" hub}}'
-              ca.pem: '{{hub fromSecret "policies" "admission-control-tls" "ca.pem"
+              ca.pem: '{{hub fromSecret "rtc-policies" "admission-control-tls" "ca.pem"
                 hub}}'
             kind: Secret
             metadata:
@@ -650,10 +650,10 @@ spec:
           objectDefinition:
             apiVersion: v1
             data:
-              ca.pem: '{{hub fromSecret "policies" "collector-tls" "ca.pem" hub}}'
-              collector-cert.pem: '{{hub fromSecret "policies" "collector-tls" "collector-cert.pem"
+              ca.pem: '{{hub fromSecret "rtc-policies" "collector-tls" "ca.pem" hub}}'
+              collector-cert.pem: '{{hub fromSecret "rtc-policies" "collector-tls" "collector-cert.pem"
                 hub}}'
-              collector-key.pem: '{{hub fromSecret "policies" "collector-tls" "collector-key.pem"
+              collector-key.pem: '{{hub fromSecret "rtc-policies" "collector-tls" "collector-key.pem"
                 hub}}'
             kind: Secret
             metadata:
@@ -673,11 +673,11 @@ spec:
           objectDefinition:
             apiVersion: v1
             data:
-              acs-host: '{{hub fromSecret "policies" "sensor-tls" "acs-host" hub}}'
-              ca.pem: '{{hub fromSecret "policies" "sensor-tls" "ca.pem" hub}}'
-              sensor-cert.pem: '{{hub fromSecret "policies" "sensor-tls" "sensor-cert.pem"
+              acs-host: '{{hub fromSecret "rtc-policies" "sensor-tls" "acs-host" hub}}'
+              ca.pem: '{{hub fromSecret "rtc-policies" "sensor-tls" "ca.pem" hub}}'
+              sensor-cert.pem: '{{hub fromSecret "rtc-policies" "sensor-tls" "sensor-cert.pem"
                 hub}}'
-              sensor-key.pem: '{{hub fromSecret "policies" "sensor-tls" "sensor-key.pem"
+              sensor-key.pem: '{{hub fromSecret "rtc-policies" "sensor-tls" "sensor-key.pem"
                 hub}}'
             kind: Secret
             metadata:
@@ -731,7 +731,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-advanced-managed-cluster-status
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -777,7 +777,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-compliance-operator-install
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -841,7 +841,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-config-quay
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -861,7 +861,7 @@ spec:
             kind: ConfigMap
             metadata:
               name: quay-config
-              namespace: policies
+              namespace: rtc-policies
         - complianceType: musthave
           objectDefinition:
             apiVersion: console.openshift.io/v1
@@ -974,7 +974,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-install-quay
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -1104,7 +1104,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-ocm-observability
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -1214,7 +1214,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-odf
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -1344,7 +1344,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-odf-status
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -1448,7 +1448,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: policy-quay-status
-  namespace: policies
+  namespace: rtc-policies
 spec:
   disabled: false
   policy-templates:
@@ -1491,7 +1491,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: openshift-plus-clusters
-  namespace: policies
+  namespace: rtc-policies
 spec:
   description: The OpenShift Platform Plus policy set applies several policies that
     install the OpenShift Platform Plus products using best practices that allow them
@@ -1508,7 +1508,7 @@ metadata:
   labels:
     open-cluster-management.io/policy-set: openshift-plus
   name: openshift-plus-hub
-  namespace: policies
+  namespace: rtc-policies
 spec:
   description: The OpenShift Platform Plus policy set applies several policies that
     will install the OpenShift Platform Plus products using best practices that allow

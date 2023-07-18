@@ -32,8 +32,24 @@ kind: Central
 metadata:
   namespace: stackrox
   name: stackrox-central-services
+  annotations:
+    scheduler.alpha.kubernetes.io/defaultTolerations: '[{"Key": "node-role.kubernetes.io/infra", "Value": "reserved", "Effect": "NoSchedule"}]'
+    scheduler.alpha.kubernetes.io/node-selector: node-role.kubernetes.io/infra=
 spec:
   central:
+    db:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+        - key: node-role.kubernetes.io/infra
+          value: reserved
+          effect: NoSchedule
+    nodeSelector:
+      node-role.kubernetes.io/infra: ""
+    tolerations:
+    - effect: NoSchedule
+      value: reserved
+      key: node-role.kubernetes.io/infra
     exposure:
       loadBalancer:
         enabled: false
@@ -48,7 +64,18 @@ spec:
   egress:
     connectivityPolicy: Online
   scanner:
+    db:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+        - key: node-role.kubernetes.io/infra
+          value: reserved
+          effect: NoSchedule
     analyzer:
+      tolerations:
+        - key: node-role.kubernetes.io/infra
+          value: reserved
+          effect: NoSchedule
       scaling:
         autoScaling: Enabled
         maxReplicas: 5
