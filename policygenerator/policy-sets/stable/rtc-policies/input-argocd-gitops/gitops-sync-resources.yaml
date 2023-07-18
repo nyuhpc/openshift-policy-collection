@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  sops-sa-satellite-capsule.json: '{{ fromSecret "openshift-gitops" "gcp-satellite-capsule-kms" "sops-sa-satellite-capsule.json" }}'
+kind: Secret
+metadata:
+  name: gcp-satellite-capsule-kms
+  namespace: rtc-policies
+type: Opaque
+---
+apiVersion: v1
+data:
+  password: '{{ fromSecret "openshift-gitops" "nyuhpc-creds" "password" }}'
+  type: '{{ fromSecret "openshift-gitops" "nyuhpc-creds" "type" }}'
+  url: '{{ fromSecret "openshift-gitops" "nyuhpc-creds" "url" }}'
+  username: '{{ fromSecret "openshift-gitops" "nyuhpc-creds" "username" }}'
+kind: Secret
+metadata:
+  name: nyuhpc-creds
+  namespace: rtc-policies
+type: Opaque
