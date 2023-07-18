@@ -24,6 +24,13 @@ policies:
     - CM-2 Baseline Configuration
   manifests:
     - path: input-oauth/
+- name: policy-gitops-operator-install
+  categories:
+    - CM Configuration Management
+  controls:
+    - CM-2 Baseline Configuration
+  manifests:
+    - path: input-argocd-gitops/gitops-operator-install.yaml
 policySets:
   - description: The OpenShift RTC policy set applies several policies
       that will configure the RTC cluster and install desired components.
