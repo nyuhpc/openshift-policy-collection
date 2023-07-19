@@ -40,6 +40,13 @@ policies:
     - path: input-argocd-gitops/gitops-sync-resources.yaml
   policySets:
     - openshift-rtc-hub
+- name: policy-gitops-argocd-install
+  categories:
+    - CM Configuration Management
+  controls:
+    - CM-2 Baseline Configuration
+  manifests:
+    - path: input-argocd-gitops/gitops-argocd-install.yaml
 policySets:
   - description: The OpenShift Platform Plus policy set applies several policies
       that will install the OpenShift Platform Plus products using best practices
