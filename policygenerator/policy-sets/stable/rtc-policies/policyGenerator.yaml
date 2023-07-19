@@ -39,7 +39,7 @@ policies:
   manifests:
     - path: input-argocd-gitops/gitops-sync-resources.yaml
   policySets:
-    - openshift-rtc-hub
+    - openshift-plus-hub
 policySets:
   - description: The OpenShift Platform Plus policy set applies several policies
       that will install the OpenShift Platform Plus products using best practices
