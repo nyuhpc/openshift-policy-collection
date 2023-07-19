@@ -185,7 +185,7 @@ spec:
 ---
 apiVersion: v1
 data:
-  sops-sa-satellite-capsule.json: '{{ fromSecret "rtc-policies" "gcp-satellite-capsule-kms" "sops-sa-satellite-capsule.json" }}'
+  sops-sa-satellite-capsule.json: '{{hub fromSecret "rtc-policies" "gcp-satellite-capsule-kms" "sops-sa-satellite-capsule.json" }}'
 kind: Secret
 metadata:
   name: gcp-satellite-capsule-kms
@@ -194,10 +194,10 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  password: '{{ fromSecret "rtc-policies" "nyuhpc-creds" "password" }}'
-  type: '{{ fromSecret "rtc-policies" "nyuhpc-creds" "type" }}'
-  url: '{{ fromSecret "rtc-policies" "nyuhpc-creds" "url" }}'
-  username: '{{ fromSecret "rtc-policies" "nyuhpc-creds" "username" }}'
+  password: '{{hub fromSecret "rtc-policies" "nyuhpc-creds" "password" }}'
+  type: '{{hub fromSecret "rtc-policies" "nyuhpc-creds" "type" }}'
+  url: '{{hub fromSecret "rtc-policies" "nyuhpc-creds" "url" }}'
+  username: '{{hub fromSecret "rtc-policies" "nyuhpc-creds" "username" }}'
 kind: Secret
 metadata:
   name: nyuhpc-creds
