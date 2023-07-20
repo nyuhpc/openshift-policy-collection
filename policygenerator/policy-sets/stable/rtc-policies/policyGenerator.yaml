@@ -63,6 +63,15 @@ policies:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
     - path: input-kyverno-policies
+- name: policy-enable-etcd-encryption
+  categories:
+    - SC System and Communications Protection
+  controls:
+    - SC-28 Protection Of Information At Rest
+  standards:
+    - NIST SP 800-53
+  manifests:
+    - path: input-apiserver/policy-enable-etcd-encryption.yaml
 policySets:
   - description: The OpenShift Platform Plus policy set applies several policies
       that will install the OpenShift Platform Plus products using best practices

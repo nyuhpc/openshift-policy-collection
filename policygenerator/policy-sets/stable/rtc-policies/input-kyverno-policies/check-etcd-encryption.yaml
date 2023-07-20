@@ -2,6 +2,7 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: enforce-etcd-encryption
+  namespace: kyverno
   annotations:
     policies.kyverno.io/title: Enforce etcd encryption in OpenShift
     policies.kyverno.io/category: OpenShift
