@@ -63,12 +63,21 @@ rules:
   - get
   - list
   - watch
+  - create
+  apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - validatingwebhookconfigurations
+  - mutatingwebhookconfigurations
+- verbs:
+  - get
+  - list
+  - watch
   apiGroups:
   - apiextensions.k8s.io
   - ''
   - kyverno.io
   - rbac.authorization.k8s.io
-  - admissionregistration.k8s.io
   resources:
   - customresourcedefinitions
   - configmaps
@@ -77,8 +86,6 @@ rules:
   - updaterequests
   - clusterrolebindings
   - rolebindings
-  - validatingwebhookconfigurations
-  - mutatingwebhookconfigurations
   - namespaces
 ---
 kind: ClusterRoleBinding
