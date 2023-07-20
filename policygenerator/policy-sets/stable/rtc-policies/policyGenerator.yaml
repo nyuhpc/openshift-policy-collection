@@ -17,6 +17,7 @@ policyDefaults:
   standards:
     - NIST SP 800-53
 policies:
+# Cluster OAuth Policies - start
 - name: policy-oauth-config
   categories:
     - CM Configuration Management
@@ -24,6 +25,17 @@ policies:
     - CM-2 Baseline Configuration
   manifests:
     - path: input-oauth/
+- name: policy-oauth-sync-resources
+  categories:
+    - CM Configuration Management
+  controls:
+    - CM-2 Baseline Configuration
+  manifests:
+    - path: input-oauth/oauth-sync-resources.yaml
+  policySets:
+    - openshift-rtc-hub
+# Cluster OAuth Policies - end
+# Cluster GitOps/ArgoCD Policies - start
 - name: policy-gitops-operator-install
   categories:
     - CM Configuration Management
@@ -40,15 +52,6 @@ policies:
     - path: input-argocd-gitops/gitops-sync-resources.yaml
   policySets:
     - openshift-rtc-hub
-- name: policy-oauth-sync-resources
-  categories:
-    - CM Configuration Management
-  controls:
-    - CM-2 Baseline Configuration
-  manifests:
-    - path: input-oauth/oauth-sync-resources.yaml
-  policySets:
-    - openshift-rtc-hub
 - name: policy-gitops-argocd-install
   categories:
     - CM Configuration Management
@@ -56,6 +59,15 @@ policies:
     - CM-2 Baseline Configuration
   manifests:
     - path: input-argocd-gitops/gitops-argocd-install.yaml
+# Cluster GitOps/ArgoCD Policies - end
+# Cluster Kyverno Policies - start
+- name: policy-fix-kyverno-roles
+  categories:
+    - CM Configuration Management
+  controls:
+    - CM-2 Baseline Configuration
+  manifests:
+    - path: input-kyverno
 - name: policy-kyverno-clusterpolicies
   categories:
     - SI System and Information Integrity
@@ -63,6 +75,8 @@ policies:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
     - path: input-kyverno-policies
+# Cluster Kyverno Policies - end
+# Cluster APIServer Policies - start
 - name: policy-enable-etcd-encryption
   categories:
     - SC System and Communications Protection
@@ -72,6 +86,7 @@ policies:
     - NIST SP 800-53
   manifests:
     - path: input-apiserver/policy-enable-etcd-encryption.yaml
+# Cluster APIServer Policies - start
 policySets:
   - description: The OpenShift Platform Plus policy set applies several policies
       that will install the OpenShift Platform Plus products using best practices
