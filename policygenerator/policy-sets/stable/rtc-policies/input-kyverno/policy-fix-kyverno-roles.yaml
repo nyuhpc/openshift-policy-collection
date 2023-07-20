@@ -347,7 +347,7 @@ subjects:
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: 'kyverno:reports-controller:core'
+  name: 'kyverno:reports-controller-2'
 rules:
   - verbs:
       - get
