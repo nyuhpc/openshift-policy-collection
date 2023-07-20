@@ -5,6 +5,30 @@ metadata:
   namespace: openshift-gitops
 spec:
   resourceTrackingMethod: annotation+label
+  resourceIgnoreDifferences:
+    resourceIdentifiers:
+    - group: rbac.authorization.k8s.io
+      kind: ClusterRole
+      customization:
+        jsonPointers:
+        - /aggregationRule
+  resource.exclusions: |
+    - apiGroups:
+        - kyverno.io
+      kinds:
+        - AdmissionReport
+        - BackgroundScanReport
+        - ClusterAdmissionReport
+        - ClusterBackgroundScanReport
+      clusters:
+        - '*'
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - TaskRun
+      - PipelineRun
   applicationSet:
     resources:
       limits:
@@ -139,14 +163,6 @@ spec:
     - name: sops-config
       secret:
         secretName: sops-config
-  resourceExclusions: |
-    - apiGroups:
-      - tekton.dev
-      clusters:
-      - '*'
-      kinds:
-      - TaskRun
-      - PipelineRun
   server:
     autoscale:
       enabled: false
