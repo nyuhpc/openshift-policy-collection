@@ -40,6 +40,15 @@ policies:
     - path: input-argocd-gitops/gitops-sync-resources.yaml
   policySets:
     - openshift-rtc-hub
+- name: policy-oauth-sync-resources
+  categories:
+    - CM Configuration Management
+  controls:
+    - CM-2 Baseline Configuration
+  manifests:
+    - path: input-oauth/oauth-sync-resources.yaml
+  policySets:
+    - openshift-rtc-hub
 - name: policy-gitops-argocd-install
   categories:
     - CM Configuration Management

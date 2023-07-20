@@ -1,6 +1,6 @@
 apiVersion: v1
 data:
-  clientSecret: '{{hub fromSecret "openshift-config" "nyu-sso-openid-client-secret" "clientSecret" hub}}'
+  clientSecret: '{{hub fromSecret "rtc-policies" "nyu-sso-openid-client-secret" "clientSecret" hub}}'
 kind: Secret
 metadata:
   name: nyu-sso-openid-client-secret
@@ -9,7 +9,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  clientSecret: '{{hub fromSecret "openshift-config" "hpc-sso-openid-client-secret" "clientSecret" hub}}'
+  clientSecret: '{{hub fromSecret "rtc-policies" "hpc-sso-openid-client-secret" "clientSecret" hub}}'
 kind: Secret
 metadata:
   name: hpc-sso-openid-client-secret
