@@ -2,6 +2,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: 'kyverno:admission-controller-2'
+  namespace: kyverno
 rules:
 - verbs:
   - get
