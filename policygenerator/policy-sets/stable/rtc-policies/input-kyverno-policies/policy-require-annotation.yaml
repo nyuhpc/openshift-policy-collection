@@ -21,7 +21,7 @@ spec:
       any:
       - resources:
           kinds:
-          - namespace
+          - Namespace
     exclude:
       any:
       - resources:
