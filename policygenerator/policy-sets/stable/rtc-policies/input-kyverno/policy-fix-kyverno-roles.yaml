@@ -1,3 +1,4 @@
+# Admission Controller
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -46,6 +47,12 @@ rules:
   resources:
   - deployments
   - deployments/scale
+- verbs:
+  - list
+  apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
@@ -60,11 +67,19 @@ rules:
   - apiextensions.k8s.io
   - ''
   - kyverno.io
+  - rbac.authorization.k8s.io
+  - admissionregistration.k8s.io
   resources:
   - customresourcedefinitions
   - configmaps
   - clusterpolicies
   - policies
+  - updaterequests
+  - clusterrolebindings
+  - rolebindings
+  - validatingwebhookconfigurations
+  - mutatingwebhookconfigurations
+  - namespaces
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -94,3 +109,86 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: 'kyverno:admission-controller-2'
+---
+# Cleanup Controller
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: 'kyverno:cleanup-controller-2'
+rules:
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - update
+      - watch
+    apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - validatingwebhookconfigurations
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - namespaces
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+      - deletecollection
+    apiGroups:
+      - kyverno.io
+    resources:
+      - clustercleanuppolicies
+      - cleanuppolicies
+      - clustercleanuppolicies/*
+      - cleanuppolicies/*
+  - verbs:
+      - create
+      - delete
+      - get
+      - list
+      - update
+      - watch
+    apiGroups:
+      - batch
+    resources:
+      - cronjobs
+  - verbs:
+      - create
+      - patch
+      - update
+    apiGroups:
+      - ''
+      - events.k8s.io
+    resources:
+      - events
+  - verbs:
+      - create
+    apiGroups:
+      - authorization.k8s.io
+    resources:
+      - subjectaccessreviews
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kyverno:cleanup-controller-2
+  labels:
+    app.kubernetes.io/component: cleanup-controller-2
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kyverno:cleanup-controller-2
+subjects:
+  - kind: ServiceAccount
+    name: kyverno-cleanup-controller
+    namespace: kyverno
