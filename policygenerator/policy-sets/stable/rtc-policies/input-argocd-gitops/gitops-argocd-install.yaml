@@ -12,7 +12,7 @@ spec:
       customization:
         jsonPointers:
         - /aggregationRule
-  resource.exclusions: |
+  resourceExclusions: |
     - apiGroups:
         - kyverno.io
       kinds:
