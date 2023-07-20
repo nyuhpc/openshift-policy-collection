@@ -60,10 +60,12 @@ metadata:
   name: 'kyverno:admission-controller-2'
 rules:
 - verbs:
+  - create
+  - delete
   - get
   - list
+  - update
   - watch
-  - create
   apiGroups:
   - admissionregistration.k8s.io
   resources:
