@@ -11,7 +11,7 @@ spec:
       kind: ClusterRole
       customization:
         jsonPointers:
-        - /aggregationRule
+        - /rules
   resourceExclusions: |
     - apiGroups:
         - kyverno.io
