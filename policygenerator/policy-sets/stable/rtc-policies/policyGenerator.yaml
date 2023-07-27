@@ -21,8 +21,11 @@ policies:
 - name: policy-oauth-config
   categories:
     - CM Configuration Management
+    - AC Access Control
   controls:
     - CM-2 Baseline Configuration
+    - AC-2 Account Management
+    - AC-2-1 Automated System Account Management
   manifests:
     - path: input-oauth/
 - name: policy-oauth-sync-resources
