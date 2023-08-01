@@ -50,7 +50,7 @@ policies:
     - CM-2 Baseline Configuration
   manifests:
     - path: input-oauth/oauth-sync-resources.yaml
-    - path: input-oauth/oauth-sync-resources-dev.yaml
+    # - path: input-oauth/oauth-sync-resources-dev.yaml
   policySets:
     - openshift-rtc-hub
 # Cluster OAuth Policies - end

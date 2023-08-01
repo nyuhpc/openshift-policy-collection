@@ -10,4 +10,5 @@ spec:
         matchExpressions:
           - {key: env, operator: In, values: ["dev"]}
           - {key: vendor, operator: In, values: ["OpenShift"]}
+          - {key: name, operator: NotIn, values: ["local-cluster"]}
           
