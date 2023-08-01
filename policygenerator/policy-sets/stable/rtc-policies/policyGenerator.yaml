@@ -119,6 +119,6 @@ policySets:
       placementPath: input/rtc-placement.yaml
   - description: The OpenShift RTC-dev policy set applies several policies
       that will configure RTC-dev clusters and install desired components.
-    name: openshift-rtc
+    name: openshift-rtc-dev
     placement:
       placementPath: input/rtc-placement.yaml
