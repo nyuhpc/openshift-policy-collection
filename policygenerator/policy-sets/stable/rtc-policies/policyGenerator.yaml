@@ -121,4 +121,4 @@ policySets:
       that will configure RTC-dev clusters and install desired components.
     name: openshift-rtc-dev
     placement:
-      placementPath: input/rtc-placement.yaml
+      placementPath: input/dev-placement.yaml
