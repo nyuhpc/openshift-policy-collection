@@ -27,7 +27,22 @@ policies:
     - AC-2 Account Management
     - AC-2-1 Automated System Account Management
   manifests:
-    - path: input-oauth/
+    - path: input-oauth/policy-oauth-config.yaml
+    - path: input-oauth/oauth-sync-resources.yaml
+  policySets:
+    - openshift-rtc
+- name: policy-oauth-config-dev
+  categories:
+    - CM Configuration Management
+    - AC Access Control
+  controls:
+    - CM-2 Baseline Configuration
+    - AC-2 Account Management
+    - AC-2-1 Automated System Account Management
+  manifests:
+    - path: input-oauth/policy-oauth-config-dev.yaml
+  policySets:
+    - openshift-rtc-dev
 - name: policy-oauth-sync-resources
   categories:
     - CM Configuration Management
@@ -35,6 +50,7 @@ policies:
     - CM-2 Baseline Configuration
   manifests:
     - path: input-oauth/oauth-sync-resources.yaml
+    - path: input-oauth/oauth-sync-resources-dev.yaml
   policySets:
     - openshift-rtc-hub
 # Cluster OAuth Policies - end
@@ -91,15 +107,18 @@ policies:
     - path: input-apiserver/policy-enable-etcd-encryption.yaml
 # Cluster APIServer Policies - start
 policySets:
-  - description: The OpenShift Platform Plus policy set applies several policies
-      that will install the OpenShift Platform Plus products using best practices
-      that allow them to work well together. This policy set is focused on 
-      the components that install to the Advanced Cluster Management hub.
+  - description: The OpenShift RTC-Hub policy set applies several policies
+      that will configure the RTC-Hub cluster and install desired components.
     name: openshift-rtc-hub
     placement:
       placementPath: input/hub-placement.yaml
   - description: The OpenShift RTC policy set applies several policies
       that will configure the RTC cluster and install desired components.
+    name: openshift-rtc
+    placement:
+      placementPath: input/rtc-placement.yaml
+  - description: The OpenShift RTC-dev policy set applies several policies
+      that will configure RTC-dev clusters and install desired components.
     name: openshift-rtc
     placement:
       placementPath: input/rtc-placement.yaml

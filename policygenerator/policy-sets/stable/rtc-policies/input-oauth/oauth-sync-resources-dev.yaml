@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  clientSecret: '{{ fromSecret "openshift-config" "hpc-sso-dev-openid-client-secret" "clientSecret" }}'
+kind: Secret
+metadata:
+  name: hpc-sso-dev-openid-client-secret
+  namespace: rtc-policies
+type: Opaque
