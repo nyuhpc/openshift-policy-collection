@@ -20,24 +20,16 @@ spec:
   rules:
   - name: validate-resources
     match:
-      resources:
-        kinds:
-        - Pod
+      any:
+      - resources:
+          kinds:
+          - Pod
     exclude:
       any:
       - resources:
           namespaces:
-          - default
-          - openshift
           - "kube-*"
           - "openshift-*"
-          - default
-          - kyverno
-          - "open-cluster-management-*"
-          - stackrox
-          - rhacs-operator
-          - sdev-rtc
-          - "ansible*"
     validate:
       message: "CPU and memory resource requests and limits are required."
       pattern:
