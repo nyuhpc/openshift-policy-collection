@@ -16,6 +16,7 @@ policyDefaults:
   severity: medium
   standards:
     - NIST SP 800-53
+  informKyvernoPolicies: true
 policies:
 # Cluster OAuth Policies - start
 - name: policy-oauth-config
@@ -93,7 +94,7 @@ policies:
   controls:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
-    - path: input-kyverno-policies/policy-require-annotation.yaml
+    - path: input-kyverno-policies
 # Cluster Kyverno Policies - end
 # Cluster APIServer Policies - start
 - name: policy-enable-etcd-encryption
