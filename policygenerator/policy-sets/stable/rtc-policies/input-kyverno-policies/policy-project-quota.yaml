@@ -14,8 +14,9 @@ metadata:
       This policy will generate ResourceQuota and LimitRange resources when
       a new Project is created.      
 spec:
+  background: false
   rules:
-  - name: generate-resourcequota
+  - name: generate-resource-quota
     match:
       any:
       - resources:
@@ -26,9 +27,9 @@ spec:
     generate:
       apiVersion: v1
       kind: ResourceQuota
-      name: default-resourcequota
+      name: default-resource-quota
       synchronize: true
-      namespace: "{{request.object.metadata.namespace}}"
+      namespace: "{{request.object.metadata.name}}"
       data:
         spec:
           hard:

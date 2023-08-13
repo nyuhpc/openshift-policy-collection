@@ -89,6 +89,7 @@ policies:
   manifests:
     - path: input-kyverno
 - name: policy-kyverno-clusterpolicies
+  disabled: false
   categories:
     - SI System and Information Integrity
   controls:
