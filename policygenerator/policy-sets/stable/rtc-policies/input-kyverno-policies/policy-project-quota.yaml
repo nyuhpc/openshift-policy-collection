@@ -18,7 +18,7 @@ spec:
   rules:
   - name: generate-resource-quota
     match:
-      any:
+      all:
       - resources:
           names:
           - "user-*"
@@ -39,7 +39,7 @@ spec:
             limits.memory: '16Gi'
   - name: generate-limit-range
     match:
-      any:
+      all:
       - resources:
           kinds:
           - Namespace
