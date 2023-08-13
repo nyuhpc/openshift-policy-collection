@@ -29,7 +29,7 @@ spec:
       kind: ResourceQuota
       name: default-resource-quota
       synchronize: true
-      namespace: `{{request.object.metadata.name}}`
+      namespace:"{{`{{request.object.metadata.name}}`}}"
       data:
         spec:
           hard:
