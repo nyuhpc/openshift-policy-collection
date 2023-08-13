@@ -74,9 +74,9 @@ spec:
   centralEndpoint: |
     {{ fromSecret "stackrox" "sensor-tls" "acs-host" | base64dec }}
   admissionControl:
-    listenOnCreates: false
+    listenOnCreates: true
     listenOnEvents: true
-    listenOnUpdates: false
+    listenOnUpdates: true
   perNode:
     collector:
       collection: EBPF
