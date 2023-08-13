@@ -22,20 +22,8 @@ spec:
       - resources:
           kinds:
           - Namespace
-    exclude:
-      any:
-      - resources:
-          namespaces:
-          - default
-          - openshift
-          - "kube-*"
-          - "openshift-*"
-          - default
-          - kyverno
-          - "open-cluster-management-*"
-          - stackrox
-          - rhacs-operator
-          - sdev-rtc
+          names:
+          - "user-*"
     validate:
       message: "The annotation `nyu.edu/department` is required."
       pattern:

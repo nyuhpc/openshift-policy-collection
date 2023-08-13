@@ -37,25 +37,27 @@ spec:
             requests.memory: '16Gi'
             limits.cpu: '4'
             limits.memory: '16Gi'
-  # - name: generate-limitrange
-  #   match:
-  #     any:
-  #     - resources:
-  #         kinds:
-  #         - Namespace
-  #   generate:
-  #     apiVersion: v1
-  #     kind: LimitRange
-  #     name: default-limitrange
-  #     synchronize: true
-  #     namespace: "{{request.object.metadata.namespace}}"
-  #     data:
-  #       spec:
-  #         limits:
-  #         - default:
-  #             cpu: 500m
-  #             memory: 1Gi
-  #           defaultRequest:
-  #             cpu: 200m
-  #             memory: 256Mi
-  #           type: Container
+  - name: generate-limit-range
+    match:
+      any:
+      - resources:
+          kinds:
+          - Namespace
+          names:
+          - "user-*"
+    generate:
+      apiVersion: v1
+      kind: LimitRange
+      name: default-limit-range
+      synchronize: true
+      namespace: "{{ `{{request.object.metadata.name}}` }}"
+      data:
+        spec:
+          limits:
+          - default:
+              cpu: 500m
+              memory: 1Gi
+            defaultRequest:
+              cpu: 200m
+              memory: 256Mi
+            type: Container
