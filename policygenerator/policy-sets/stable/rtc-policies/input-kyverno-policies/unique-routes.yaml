@@ -43,4 +43,4 @@ spec:
             all:
               - key: "{{ `{{ request.object.spec.host }}` }}"
                 operator: AnyIn
-                value: "{{ hosts }}"
+                value: "{{ `{{ hosts }}` }}"
