@@ -24,6 +24,12 @@ spec:
       - resources:
           kinds:
           - Pod
+    preconditions:
+        any:
+        - key: "{{ `{{request.operation || 'BACKGROUND'}}` }}"
+          operator: NotIn
+          value:
+          - DELETE
     validate:
       message: "CPU and memory resource requests and limits are required."
       pattern:
