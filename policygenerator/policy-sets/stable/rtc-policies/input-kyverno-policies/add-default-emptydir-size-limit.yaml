@@ -32,7 +32,7 @@ spec:
           - key: "{{element.keys(@)}}"
             operator: AnyIn
             value: emptyDir
-          - key: "{{ `{{element.emptyDir.sizeLimit || ''}}` }}"
+          - key: "{{element.emptyDir.sizeLimit || ''}}"
             operator: Equals
             value: ''
         patchesJson6902: |-
