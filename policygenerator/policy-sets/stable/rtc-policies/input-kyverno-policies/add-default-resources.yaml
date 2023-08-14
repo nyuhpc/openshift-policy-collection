@@ -27,6 +27,13 @@ spec:
               - Pod
             namespaces:
               - "user-cte3-test-*"
+      preconditions:
+        any:
+        - key: "{{ `{{request.operation || 'BACKGROUND'}}` }}"
+          operator: AnyIn
+          value:
+          - CREATE
+          - UPDATE
       mutate:
         patchStrategicMerge:
           spec:
