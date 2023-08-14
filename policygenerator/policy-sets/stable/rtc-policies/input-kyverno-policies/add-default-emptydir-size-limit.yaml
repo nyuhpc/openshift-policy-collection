@@ -26,7 +26,7 @@ spec:
           - Pod
     mutate:
       foreach:
-      - list: "{{ `request.object.spec.volumes[]` }}"
+      - list: "request.object.spec.volumes[]"
         preconditions:
           all:
           - key: "{{element.keys(@)}}"
@@ -36,6 +36,6 @@ spec:
             operator: Equals
             value: ''
         patchesJson6902: |-
-          - path: `/spec/volumes/{{elementIndex}}/emptyDir/sizeLimit`
+          - path: "/spec/volumes/{{elementIndex}}/emptyDir/sizeLimit"
             op: add
             value: 1Gi   
