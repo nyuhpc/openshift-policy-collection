@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: add-project-quota
+  name: add-default-project-quota
   annotations:
     policies.kyverno.io/title: Add Quota
     policies.kyverno.io/category: Multi-Tenancy, RTC Best Practices
@@ -56,7 +56,7 @@ spec:
           limits:
           - default:
               cpu: 500m
-              memory: 1Gi
+              memory: 512Mi
             defaultRequest:
               cpu: 200m
               memory: 256Mi
