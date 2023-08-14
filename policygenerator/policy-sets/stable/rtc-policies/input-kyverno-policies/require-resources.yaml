@@ -28,8 +28,8 @@ spec:
       any:
       - resources:
           namespaces:
-          - {{ "kube-*" }}
-          - {{ "openshift-*" }}
+          - "{{ \"kube-*\" }}"
+          - "{{ \"openshift-*\" }}"
           - "ansible-*"
           - "open-cluster-management-*"
     validate:
