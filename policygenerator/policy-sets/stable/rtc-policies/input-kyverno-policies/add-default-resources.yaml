@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: add-ttl-jobs
+  name: add-default-rescource-requests-limits
   annotations:
     policies.kyverno.io/title: Add Resource limits to Pods and Jobs
     policies.kyverno.io/category: Other
