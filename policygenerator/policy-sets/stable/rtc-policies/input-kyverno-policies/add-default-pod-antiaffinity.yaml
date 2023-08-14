@@ -4,7 +4,7 @@ metadata:
   name: insert-pod-antiaffinity
   annotations:
     policies.kyverno.io/title: Add Pod Anti-Affinity
-    policies.kyverno.io/category: Sample
+    policies.kyverno.io/category: Best Practices, Other
     policies.kyverno.io/subject: Deployment, Pod
     policies.kyverno.io/minversion: 1.6.0
     policies.kyverno.io/description: >-

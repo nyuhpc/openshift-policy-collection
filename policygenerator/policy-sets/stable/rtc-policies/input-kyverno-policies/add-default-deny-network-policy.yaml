@@ -4,7 +4,7 @@ metadata:
   name: add-deny-networkpolicy
   annotations:
     policies.kyverno.io/title: Add Network Policy
-    policies.kyverno.io/category: Multi-Tenancy, EKS Best Practices
+    policies.kyverno.io/category: Multi-Tenancy, Best Practices
     policies.kyverno.io/subject: NetworkPolicy
     policies.kyverno.io/minversion: 1.6.0
     policies.kyverno.io/description: >-

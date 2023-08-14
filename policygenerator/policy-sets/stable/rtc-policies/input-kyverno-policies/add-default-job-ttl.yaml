@@ -3,8 +3,8 @@ kind: ClusterPolicy
 metadata:
   name: add-ttl-jobs
   annotations:
-    policies.kyverno.io/title: Add TTL to Jobs
-    policies.kyverno.io/category: Other
+    policies.kyverno.io/title: Add default TTL to Jobs
+    policies.kyverno.io/category: Best Practices, Other
     policies.kyverno.io/severity: medium
     policies.kyverno.io/subject: Job
     kyverno.io/kyverno-version: 1.7.1
