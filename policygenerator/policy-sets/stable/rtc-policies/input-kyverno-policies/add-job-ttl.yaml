@@ -14,8 +14,7 @@ metadata:
       Jobs which are user created can often pile up and consume
       excess space in the cluster. In Kubernetes 1.23, the TTL-after-finished controller
       is stable and will automatically clean up these Jobs if the ttlSecondsAfterFinished
-      is specified. This policy adds the ttlSecondsAfterFinished field to an Job that does
-      not have an ownerReference set if not already specified.      
+      is specified. This policy adds the ttlSecondsAfterFinished field to any Job.      
 spec:
   rules:
     - name: add-ttlSecondsAfterFinished
@@ -24,11 +23,6 @@ spec:
         - resources:
             kinds:
               - Job
-      preconditions:
-        any:
-          - key: "{{ "{{ request.object.metadata.ownerReferences || `[]` }}" }}"
-            operator: Equals
-            value: []
       mutate:
         patchStrategicMerge:
           spec:
