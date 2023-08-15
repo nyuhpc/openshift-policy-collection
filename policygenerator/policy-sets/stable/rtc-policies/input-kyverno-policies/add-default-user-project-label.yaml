@@ -1,0 +1,40 @@
+# apiVersion: kyverno.io/v1
+# kind: ClusterPolicy
+# metadata:
+#   name: add-default-user-project-label
+#   annotations:
+#     policies.kyverno.io/title: Add Default User Project Label
+#     policies.kyverno.io/category: Best Practices, Other
+#     policies.kyverno.io/minversion: 1.6.0
+#     policies.kyverno.io/severity: medium
+#     policies.kyverno.io/subject: Label
+#     policies.kyverno.io/description: >-
+#       Ensure Namespace/Projects have a default project-class label if not specified.
+#       This policy performs a simple mutation which adds a template label
+#       and selector match label `app=object.name` to Namespaces that are not flagged for priority.      
+# spec:
+#   rules:
+#   - name: exclude priority namespaces and add default label
+#     context:
+#       - name: namespacefilters
+#         configMap:
+#           name: priority-namespace-filters
+#           namespace: rtc-user-settings
+#     match:
+#       any:
+#       - resources:
+#           names:
+#           - "user-*"
+#           kinds:
+#           - Namespace
+#     preconditions:
+#       all:
+#       - key: "{{ `{{request.object.metadata.name}}` }}"
+#         operator: AnyNotIn
+#         value: "{{ `{{namespacefilters.data.exclude}}` }}"
+#     mutate:
+#       patchesJson6902: |-
+#         - path: "/metadata/labels"
+#           op: add
+#           value:
+#             project-priority: default
