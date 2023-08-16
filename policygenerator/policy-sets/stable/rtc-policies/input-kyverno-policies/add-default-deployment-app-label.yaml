@@ -16,10 +16,12 @@ spec:
   rules:
   - name: add-labels
     match:
-      any:
+      all:
       - resources:
           kinds:
           - Deployment
+          namespaces:
+          - "user-*"
     mutate:
       patchStrategicMerge:
         spec:
