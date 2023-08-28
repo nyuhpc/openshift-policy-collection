@@ -16,10 +16,12 @@ spec:
   rules:
     - name: insert-pod-antiaffinity
       match:
-        any:
+        all:
         - resources:
             kinds:
               - Deployment
+            namespaces:
+              - "user-*"
       preconditions:
         # This precondition selects Pods with the label `app` defined
         all:
