@@ -25,9 +25,9 @@ spec:
     mutate:
       patchStrategicMerge:
         spec:
-          # selector:
-          #   matchLabels:
-          #     +(app): "{{ `{{request.object.metadata.name}}`}}"
+          selector:
+            matchLabels:
+              +(app): "{{ `{{request.object.metadata.name}}`}}"
           template:
             metadata:
               labels:
