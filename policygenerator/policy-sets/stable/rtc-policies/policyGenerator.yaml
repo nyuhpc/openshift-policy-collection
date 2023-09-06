@@ -81,23 +81,23 @@ policies:
     - path: input-argocd-gitops/gitops-argocd-install.yaml
 # Cluster GitOps/ArgoCD Policies - end
 # Cluster Kyverno Policies - start
-- name: policy-fix-kyverno-roles
-  categories:
-    - CM Configuration Management
-  controls:
-    - CM-2 Baseline Configuration
-  manifests:
-    - path: input-kyverno
-- name: policy-kyverno-best-practices
-  disabled: false
-  categories:
-    - SI System and Information Integrity
-  controls:
-    - SI-5 Security Alerts Advisories and Directives
-  manifests:
-    - path: input-kyverno-policies
-  policySets:
-    - openshift-rtc-dev
+# - name: policy-fix-kyverno-roles
+#   categories:
+#     - CM Configuration Management
+#   controls:
+#     - CM-2 Baseline Configuration
+#   manifests:
+#     - path: input-kyverno
+# - name: policy-kyverno-best-practices
+#   disabled: false
+#   categories:
+#     - CM Configuration Management
+#   controls:
+#     - CM-2 Baseline Configuration
+#   manifests:
+#     - path: input-kyverno-policies
+#   policySets:
+#     - openshift-rtc-dev
 # Cluster Kyverno Policies - end
 # Cluster APIServer Policies - start
 - name: policy-enable-etcd-encryption
