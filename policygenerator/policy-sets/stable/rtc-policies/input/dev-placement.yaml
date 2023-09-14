@@ -11,4 +11,18 @@ spec:
           - {key: env, operator: In, values: ["dev"]}
           - {key: vendor, operator: In, values: ["OpenShift"]}
           - {key: name, operator: NotIn, values: ["local-cluster"]}
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-openshift-rtc-dev
+  namespace: rtc-policies
+placementRef:
+  name: placement-openshift-rtc-dev
+  apiGroup: cluster.open-cluster-management.io
+  kind: Placement
+subjects:
+  - name: openshift-rtc
+    apiGroup: policy.open-cluster-management.io
+    kind: PolicySet
           
