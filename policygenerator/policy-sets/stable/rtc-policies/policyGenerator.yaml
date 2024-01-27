@@ -19,19 +19,19 @@ policyDefaults:
   informKyvernoPolicies: true
 policies:
 # Cluster OAuth Policies - start
-- name: policy-oauth-config
-  categories:
-    - CM Configuration Management
-    - AC Access Control
-  controls:
-    - CM-2 Baseline Configuration
-    - AC-2 Account Management
-    - AC-2-1 Automated System Account Management
-  manifests:
-    - path: input-oauth/policy-oauth-config.yaml
-    - path: input-oauth/oauth-sync-resources.yaml
-  policySets:
-    - openshift-rtc
+# - name: policy-oauth-config
+#   categories:
+#     - CM Configuration Management
+#     - AC Access Control
+#   controls:
+#     - CM-2 Baseline Configuration
+#     - AC-2 Account Management
+#     - AC-2-1 Automated System Account Management
+#   manifests:
+#     - path: input-oauth/policy-oauth-config.yaml
+#     - path: input-oauth/oauth-sync-resources.yaml
+#   policySets:
+#     - openshift-rtc
 - name: policy-oauth-config-dev
   categories:
     - CM Configuration Management
@@ -44,6 +44,9 @@ policies:
     - path: input-oauth/policy-oauth-config-dev.yaml
   policySets:
     - openshift-rtc-dev
+  placement:
+    clusterSelectors:
+        vendor: "OpenShift"
 - name: policy-oauth-sync-resources
   categories:
     - CM Configuration Management
