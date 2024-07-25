@@ -38,6 +38,12 @@ metadata:
 spec:
   central:
     db:
+      isEnabled: Default
+      persistence:
+        persistentVolumeClaim:
+          claimName: centraldb
+          size: 200Gi
+          storageClassName: ssd-csi
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
