@@ -77,6 +77,23 @@ spec:
     listenOnCreates: false
     listenOnEvents: true
     listenOnUpdates: false
+  overlays:
+  - apiVersion: apps/v1
+    kind: DaemonSet
+    name: collector
+    patches:
+    - path: spec.template.spec.containers[name:collector].env[-1]
+      value: |
+        name: ROX_COLLECTOR_SINSP_CPU_PER_BUFFER
+        value: "4"
+    - path: spec.template.spec.containers[name:collector].env[-1]
+      value: |
+        name: ROX_COLLECTOR_SINSP_THREAD_CACHE_SIZE
+        value: "8192"
+    - path: spec.template.spec.containers[name:collector].env[-1]
+      value: |
+        name: ROX_COLLECTOR_SINSP_BUFFER_SIZE
+        value: "1048576"
   perNode:
     collector:
       collection: CORE_BPF
