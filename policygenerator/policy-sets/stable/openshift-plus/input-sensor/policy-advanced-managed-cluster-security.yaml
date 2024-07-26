@@ -89,7 +89,7 @@ spec:
     - path: spec.template.spec.containers[name:collector].env[-1]
       value: |
         name: ROX_COLLECTOR_SINSP_THREAD_CACHE_SIZE
-        value: "8192"
+        value: "4096"
     - path: spec.template.spec.containers[name:collector].env[-1]
       value: |
         name: ROX_COLLECTOR_SINSP_BUFFER_SIZE
