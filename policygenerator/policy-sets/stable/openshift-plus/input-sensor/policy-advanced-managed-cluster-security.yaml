@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -99,3 +100,4 @@ spec:
       collection: CORE_BPF
       imageFlavor: Regular
     taintToleration: TolerateTaints
+# https://access.redhat.com/solutions/7062920
